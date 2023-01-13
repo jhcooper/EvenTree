@@ -1,0 +1,47 @@
+Given a binary tree (in the form of a 2D vector) with an even 
+number of nodes, this project returns the maximum number of 
+edges that can be removed such that the remaining subtrees 
+each have an even number of nodes as well. This is accomplished
+by preforming a Depth First Search (DFS) on each node of the
+tree in order to count the number of descendants each node has.
+If a node has an odd number of descendants, this means it forms
+an even subtree and thus the number of "even" edges (an edge 
+that can be removed to form two even subtrees) is incrimented
+by one. 
+
+eventree.cc countains one helper function and a main function.
+
+countEvenSubtrees(int):
+	Parameters:
+	tree (&2D  int vector) - the adjacency list of the tree
+	currentNode (int) - the index of the current node
+	isVisited(&boolean vector) - A vector of length tree.size()
+		that is used to keep track of what nodes have
+		been visited. if node I has been visited,
+		isVisited[i] will be true.
+	evenSubtrees (&int)- the total number of even subtrees/
+		the total number of removable edges.
+
+	Starting at the given current node index
+	(currentNode), recursively calls itself, passing the current node's
+	children and incrementing the number of descendants per recursive
+	function call. This effectively counts how many descendants 
+	each node of the tree has. Before returning, the function 
+	checks if the passed node has an odd number of children. 
+	If it does, the value of evenSubtrees is incremented by one
+	(globally)
+main(int)-
+	Contains several 2D vectors representing trees for
+	testing. Additionally, initializes isVisited and
+	evenSubtrees before calling countEvenSubtrees.
+	Before printing the result, subtracts one from
+	evenSubtrees if the starting tree is even. This is
+	because countEvenSubtrees returns the number of even
+	subtrees, not the number of removeable edges. Since removing
+	an edge creates two subtrees, this must be accounted for.
+
+TIME COMPLEXITY REPORT:
+The runtime of this algorithm is O(n) as each node is visited
+once and only once. All other operations are preformed in
+constant time.
+
